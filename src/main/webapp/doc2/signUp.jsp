@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <!-- 파일꺠짐 방지해 -->
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -16,6 +17,18 @@
     <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
+
+<!--  회원가입 MySql관련 -->
+<%
+   String userID = null;
+   if(session.getAttribute("userID") != null){
+	   userID =(String) session.getAttribute("userID");
+   }
+%>
+<!--  회원가입 MySql관련  -->
+
+
+
 <!--네비게이션 시작-->
 <nav class="nav-all">
     <!--헤더 시작-->
@@ -146,6 +159,9 @@
 </nav>
 
 <section class="Main" style="display: flex; justify-content: center; align-items: center;">
+  
+  
+  <form action="singUpAction.jsp">
     <!-- 회원가입 창 input 부분 -->
     <div id="d1">
 
@@ -153,41 +169,43 @@
 
             <div class="inputBox ipBox">
                 <input type="text" required placeholder=" " pattern="^(?=.*[a-z0-9])[a-z0-9]{6,20}$"
-                       title="6~20자의 영문과 숫자로만 입력해주세요.">
+                       title="6~20자의 영문과 숫자로만 입력해주세요." name="userID">
                 <span>아이디</span>
             </div>
 
             <div class="inputBox">
                 <input type="password" required id="password" placeholder=" "
                        pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{6,16}$"
-                       title="6~16자의 영문, 숫자, 특수문자(!@#$%^&*()._-)로만 입력해주세요.">
+                       title="6~16자의 영문, 숫자, 특수문자(!@#$%^&*()._-)로만 입력해주세요." name="userPassword">
                 <span>비밀번호</span>
             </div>
 
             <div class="inputBox">
                 <input type="password" required="" id="passwordCheck" placeholder=" "
                        title="비밀번호와 동일하게 입력해주세요."
-                       pattern="">
+                       pattern="" >
                 <span>비밀번호 확인</span>
             </div>
 
             <div class="inputBox">
                 <input type="email" required placeholder=" "
                        pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$"
-                       title="이메일 주소를 입력하세요.">
+                       title="이메일 주소를 입력하세요." name="userEmail">
                 <span>이메일</span>
             </div>
 
             <div class="inputBox ipBox">
                 <input type="text" required placeholder=" " pattern="^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$"
-                       title="2~10자의 영문, 한글, 숫자만 입력해주세요.">
+                       title="2~10자의 영문, 한글, 숫자만 입력해주세요." name="nickname">
                 <span>닉네임</span>
             </div>
 
             <a href="#" class="SignUp">
+         
                 <span>BECOME A LIBRARIAN</span>
                 <i></i>
             </a>
+                 <input type="submit" value="임시회원가입">
         </div>
 
         <!-- 이용약관 -->
@@ -254,6 +272,8 @@
             </ul>
         </form>
     </div>
+ </form>   
+    
 </section>
 
 <!--전체 JS-->

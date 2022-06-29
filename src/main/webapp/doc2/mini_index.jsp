@@ -1,31 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>URDO</title>
     <link href="../img/sidebar/logo.svg" rel="shortcut icon" type="image/png">
     <!--CSS 링크-->
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/mini/album.css">
+    <link rel="stylesheet" href="../css/mini/font.css">
+    <link rel="stylesheet" href="../css/mini/guest.css">
+    <link rel="stylesheet" href="../css/mini/home.css">
+    <link rel="stylesheet" href="../css/mini/juk.css">
+    <link rel="stylesheet" href="../css/mini/layout.css">
 </head>
 <body>
-
-
-<%
-   String userID = null;
-   if(session.getAttribute("userID") != null){
-	   userID =(String) session.getAttribute("userID");
-   }
-%>
-
-
-
-
 <!--네비게이션 시작-->
 <nav class="nav-all">
     <!--헤더 시작-->
@@ -39,7 +32,6 @@
         <div>
             <button id="arrow" onclick="moving_sidebar()">
                 <img src="../img/sidebar/arrowLeft.png" alt="leftArrow">
-                <!-- 아이콘바꿨음 -->
             </button>
         </div>
     </div>
@@ -55,7 +47,7 @@
             <tr onclick="MiniHomePage()">
                 <td><img src="../img/sidebar/quick-home.svg" alt="MiniHomePage" class="navHIcon"></td>
                 <td><span>내 미니홈피 바로가기</span></td>
-                <td><img src="../img/sidebar/quick-golink.svg" alt="arrow" class="linkIcon menuIcon" ></td>
+                <td><img src="../img/sidebar/quick-golink.svg" alt="arrow" class="linkIcon menuIcon"></td>
             </tr>
             <tr onclick="PointShop()">
                 <td><img src="../img/sidebar/quick-shop.svg" alt="PointShop" class="navHIcon"></td>
@@ -149,88 +141,96 @@
     </div>
     <!--로그인/로그아웃 버튼-->
     <div id="loginWrap">
-        
-        <% 
-        if(userID== null){
-        %>
         <button onclick="Login()" class="btn">
             <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
             <span>로그인</span>
         </button>
-        
-     <%    
-      }
-      else{
-      %>
-         <button onclick="Login()" class="btn">
-            <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
-            <span>로그아웃</span>
-        </button>
-      <%
-      }        
-        %>
-        
-        
     </div>
 </nav>
 
-<section class="Main" style="display: flex; justify-content: center; align-items: center;">
-  
-   <form action="loginAction.jsp" id="frm">
-    
-    <div id="LoginBox">
-        <!-- Login용 input -->
-        <div class="inputBox">
-            <input type="text" required="required" name="userID">
-            <span>ID</span>
-        </div>
-        <div class="inputBox">
-            <input type="password" required="required" id="pw" name="userPassword">
-            <span>PW</span>
-            <div id="toggle" onclick="showHide();" class="menuIcon"></div>
-        </div>
+<section class="Main">
 
-        <div class="checkbox">
-            <input type="checkbox" id="chk1">
-            <label for="chk1" id="chkLabel">로그인 유지</label>
-        </div>
+    <div class="bookcover">
+        <div class="bookdot">
+            <div class="page">
+                <div class="column1">
+                    <div class="visit"><span class="basic-text">TODAY <span id="TODAY">28</span> | TOTAL 24562</span></div>
+                    <div class="profile">
+                        <img class="profile-image" src="../img/miniHomePage/profileImage.jpg">
+                        <div class="profile-text basic-text">@Ano<br>학생이라는 죄로<br>학교라는 교도소에서<br>교실이라는 감옥에 갇혀<br>출석부라는
+                            죄수명단에 올라<br>교복이라는 죄수복을 입고<br>공부란 벌을 받고<br>졸업이란 석방을 기다린다
+                        </div>
+                        <div class="profile-dropdown">
+                            <div class="basic-text">아노(❁´◡`❁)</div>
+                            <div class="dropdown">
+                                <select>
+                                    <option value="padotagi">파도타기</option>
+                                    <option value="comunity">커뮤니티로 가기</option>
+                                    <option value="instagram">인스타그램으로 가기</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column2">
+                    <div class="top-text-box">
+                        <div class="title">
+                            <div class="basic-text">아노의 미니홈피</div>
+                        </div>
+                        <div class="url">
+                            <div class="basic-text">http://url주소/나중에입력</div>
+                        </div>
+                    </div>
+                    <div class="main-content">
+                        <div class="upper-content">
+                            <div class="bold-text">Updated News</div>
+                            <hr>
+                            <div class="update-box">
+                                <div class="new-text">
+                                    <div class="line"><span class="photo">사진첩</span><span
+                                            class="line_photo"> 학교 너무 힘들다..</span></div>
+                                    <div class="line"><span class="board">게시판</span><span
+                                            class="line_photo"> 사랑보다 좋은것</span></div>
+                                    <div class="line"><span class="board">게시판</span><span
+                                            class="line_photo"> 마 그레하입시더 댕댕이</span></div>
+                                    <div class="line"><span class="photo">사진첩</span><span
+                                            class="line_photo"> 2019/12/10 가평</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-content">
+                            <div class="bold-text">Mini Room</div>
+                            <hr>
+                            <div class="miniroom"><img src="../img/miniHomePage/pop-cat.gif"></div>
+                        </div>
+                    </div>
+                </div>
 
-        <input type="submit" value="로그인">
+                <div class="menu">
+                    <a href="mini_index.html">
+                        <div class="menu-box">홈</div>
+                    </a>
+                    <a href="mini_juk.html">
+                        <div class="menu-box">쥬크박스</div>
+                    </a>
+                    <a href="mini_album.html">
+                        <div class="menu-box">게시판</div>
+                    </a>
+                    <a href="mini_guest.html">
+                        <div class="menu-box">방명록</div>
+                    </a>
+                    <a href="mini_snake.html">
+                        <div class="menu-box">미니게임</div>
+                    </a>
+                </div>
 
-        <div id="signIn">
-            <a href="signUp.jsp" id="ss1">회원가입</a>
-            <span id="ss2">/</span>
-            <a href="#" id="ss3">비밀번호 찾기</a>
+            </div>
         </div>
     </div>
-    
- </form>   
+
 </section>
-
-
-<script>
-function chk_form() {
-if(document.getElementById("userID").value==''){
-	alert("성명을 입력해주십시오.");
-	return false;
-}
-if(document.getElementById("userPassword").value==''){
-	alert("비밀번호를 입력해주십시오.");
-	return false;
-}
-
-document.getElementById('frm').submit();
-}
-
-</script>
-
-
-
-
 
 <!--전체 JS-->
 <script src="../js/common.js"></script>
-<!--로그인 JS-->
-<script src="../js/login.js"></script>
 </body>
 </html>

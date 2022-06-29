@@ -5,7 +5,7 @@
     <%request.setCharacterEncoding("UTF-8"); %>
     <jsp:useBean id="user" class="user.User" scope="page" />
     <jsp:setProperty name="user" property="userID"/>
-        <jsp:setProperty name="user" property="userPassword"/>
+    <jsp:setProperty name="user" property="userPassword"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@
 	 PrintWriter script =response.getWriter();
 	   script.println("<script>");
 	   script.println("alert('이미 로그인이 되어있습니다.')");
-	   script.println("location.href = 'main.jsp'");
+	   script.println("location.href = 'login.jsp'");
 	   script.println("</script>");
  }
  // session을 확인해서 이미 있는 아아디인지확인
@@ -39,7 +39,7 @@
 	   session.setAttribute("userID",user.getUserID());
 	   PrintWriter script =response.getWriter();
 	   script.println("<script>");
-	   script.println("location.href ='main.jsp'");
+	   script.println("location.href ='bord_nowBest.jsp'");
 	   script.println("</script>");
 	   
    }else if(result == 0 ){

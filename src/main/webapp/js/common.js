@@ -29,18 +29,18 @@ function moving_sidebar()
 
 function GoHome()
 {
-    location.href = "index.html";
+    location.href = "index.jsp";
 }
 
 function MiniHomePage()
 {
 
-    location.href = "mini_index.html";
+    location.href = "mini_index.jsp";
 }
 
 function PointShop()
 {
-    location.href = 'pointShop.html';
+    location.href = 'pointShop.jsp';
 }
 
 function MyPage()
@@ -50,8 +50,11 @@ function MyPage()
 
 function Login()
 {
-    location.href = 'login.html';
+    location.href = "login.jsp";
 }
+
+
+
 
 let chk1 = document.getElementById('check1');
 let chk2 = document.getElementById('check2');

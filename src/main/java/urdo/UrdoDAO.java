@@ -1,4 +1,4 @@
-package bbs;
+package urdo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class BbsDAO {
+public class UrdoDAO {
 
 	private Connection conn;
 	
 	private ResultSet rs;
 	
-	public BbsDAO() {
+	public UrdoDAO() {
 		try {
 			String dbURL = "jdbc:mysql://localhost:3306/BBS";
 			String dbID = "root";
@@ -74,16 +74,16 @@ public class BbsDAO {
 		 
 	 }
 	
-	 public ArrayList<Bbs> getList(int pageNumber){
+	 public ArrayList<Urdo> getList(int pageNumber){
 		 
 		  String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 6"; // 내용을 위에서부터 6깨까지만 불러옴
-		  ArrayList<Bbs> list = new ArrayList<Bbs>();
+		  ArrayList<Urdo> list = new ArrayList<Urdo>();
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
 			  pstmt.setInt(1, getNext() -(pageNumber -1) *10);		
 			  rs = pstmt.executeQuery();
 			  while(rs.next()) {
-				  Bbs bbs = new Bbs();
+				  Urdo urdo = new Urdo();
 				  bbs.setBbsID(rs.getInt(1));
 				  bbs.setBbsTitle(rs.getString(2));
 				  bbs.setUserID(rs.getString(3));

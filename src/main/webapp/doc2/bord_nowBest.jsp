@@ -30,6 +30,28 @@
 
 
 <body>
+
+<!-- userID가 세션에 입력되있는지 확인용도 -->
+<%
+   String userID = null;
+   if(session.getAttribute("userID") != null){
+	   userID =(String) session.getAttribute("userID");
+   }
+   
+   /* 몇번쨰 페이지인지 알기위해서 만든코드  */
+   int pageNumber = 1;
+   if (request.getParameter("pageNumber") !=null ){
+	   pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+   }
+   
+   
+%>
+
+
+
+
+
+
 <!--네비게이션 시작-->
 <nav class="nav-all">
     <!--헤더 시작-->
@@ -152,10 +174,25 @@
     </div>
     <!--로그인/로그아웃 버튼-->
     <div id="loginWrap">
+           <% 
+        if(userID== null){
+        %>
         <button onclick="Login()" class="btn">
             <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
             <span>로그인</span>
         </button>
+        
+     <%    
+      }
+      else{
+      %>
+         <button onclick="Login()" class="btn">
+            <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
+            <span>로그아웃</span>
+        </button>
+      <%
+      }        
+        %>
     </div>
 </nav>
 <section class="Main">
@@ -312,6 +349,10 @@
             <!--  페이지 숫자 끝-->
             <!-- 게시판 내용 관련 코드  끝-->
         </div>
+        
+        
+        
+        
     </div>
 </section>
 
