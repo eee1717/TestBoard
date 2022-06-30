@@ -14,7 +14,7 @@ public class UrdoDAO {
 	
 	public UrdoDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS";
+			String dbURL = "jdbc:mysql://localhost:3306/URDO";
 			String dbID = "root";
 			String dbPassword = "1234";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -38,9 +38,9 @@ public class UrdoDAO {
 	  }
 	  return ""; //데이터베이스오류
 	}
-//	bbs아이디 가져오기
+//	URDO아이디 가져오기
 	public int getNext() {
-		  String SQL = "SELECT bbsID FROM BBS ORDER BY bbsID DESC";
+		  String SQL = "SELECT urdoID FROM URDO ORDER BY urdoID DESC";
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
 			  rs = pstmt.executeQuery();
@@ -54,17 +54,19 @@ public class UrdoDAO {
 		  return -1; //데이터베이스오류 일경우 -1을반환
 		}
 	
-	 public int write(String bbsTitle, String userID, String bbsContent)  //글쓰기 
+	 public int write(String urdoTitle,String lookup,String recommend, String userID, String urdoContent)  //글쓰기 
 	 {	
-		 String SQL = "INSERT INTO BBS VALUES (?, ?, ?, ?, ?, ?)";
+		 String SQL = "INSERT INTO URDO VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
 			  	 pstmt.setInt(1, getNext());
-			  pstmt.setString(2, bbsTitle);
-			  pstmt.setString(3, userID);
-			  pstmt.setString(4, getDate());
-			  pstmt.setString(5, bbsContent);
-			  	 pstmt.setInt(6, 1); //처음글 일경우
+			  pstmt.setString(2, urdoTitle);
+			  pstmt.setString(3, lookup);
+			  pstmt.setString(4, recommend);
+			  pstmt.setString(5, userID);
+			  pstmt.setString(6, getDate());
+			  pstmt.setString(7, urdoContent);
+			  	 pstmt.setInt(8, 1); //처음글 일경우
 			 
 			  return pstmt.executeUpdate();		 
 		  } catch (Exception e) {
@@ -76,7 +78,7 @@ public class UrdoDAO {
 	
 	 public ArrayList<Urdo> getList(int pageNumber){
 		 
-		  String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 6"; // 내용을 위에서부터 6깨까지만 불러옴
+		  String SQL = "SELECT * FROM TestBoard WHERE urdoID < ? AND urdoAvailable = 1 ORDER BY urdoID DESC LIMIT 6"; // 내용을 위에서부터 6깨까지만 불러옴
 		  ArrayList<Urdo> list = new ArrayList<Urdo>();
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -84,13 +86,15 @@ public class UrdoDAO {
 			  rs = pstmt.executeQuery();
 			  while(rs.next()) {
 				  Urdo urdo = new Urdo();
-				  bbs.setBbsID(rs.getInt(1));
-				  bbs.setBbsTitle(rs.getString(2));
-				  bbs.setUserID(rs.getString(3));
-				  bbs.setBbsDate(rs.getString(4));
-				  bbs.setBbsContent(rs.getString(5));
-				  bbs.setBbsAvailable(rs.getInt(6));
-				  list.add(bbs);
+				  urdo.setUrdoID(rs.getInt(1));
+				  urdo.setUrdoTitle(rs.getString(2));
+				  urdo.setLookup(rs.getString(3));
+				  urdo.setRecommend(rs.getString(4));
+				  urdo.setUserID(rs.getString(5));
+				  urdo.setUrdoDate(rs.getString(6));
+				  urdo.setUrdoContent(rs.getString(7));
+				  urdo.setUrdoAvailable(rs.getInt(8));
+				  list.add(urdo);
 				
 			  } 
 		  } catch (Exception e) {
@@ -102,8 +106,8 @@ public class UrdoDAO {
 	 public boolean nextPage(int pageNumber)  //페이징 처리를위해서 존재하는함수
 	 {
 		
-		  String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10"; // 내용을 위에서부터 10깨까지만 불러옴
-		  ArrayList<Bbs> list = new ArrayList<Bbs>();
+		  String SQL = "SELECT * FROM URDO WHERE urdoID < ? AND urdoAvailable = 1 ORDER BY urdoID DESC LIMIT 10"; // 내용을 위에서부터 10깨까지만 불러옴
+		  ArrayList<Urdo> list = new ArrayList<Urdo>();
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
 			  pstmt.setInt(1, getNext() -(pageNumber -1) *10);	  //게시글이 11개가되면 2개가됨  21개가되면 3개(3페이지)가됨	
@@ -118,23 +122,25 @@ public class UrdoDAO {
 		  return false;
 		}
 		 
-	 public Bbs getBbs(int bbsID) {
+	 public Urdo getUrdo(int urdoID) {
 		 
-		  String SQL = "SELECT * FROM BBS WHERE bbsID =?";  //bbsID의 값을 입력시 그숫자에 해당하는 게시글을 가져온다.
+		  String SQL = "SELECT * FROM URDO WHERE urdoID =?";  //urdoID의 값을 입력시 그숫자에 해당하는 게시글을 가져온다.
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
-			  pstmt.setInt(1, bbsID);	 
+			  pstmt.setInt(1, urdoID);	 
 			  rs = pstmt.executeQuery();
 			 if(rs.next()) {				  
-				  Bbs bbs = new Bbs();
-				  bbs.setBbsID(rs.getInt(1));
-				  bbs.setBbsTitle(rs.getString(2));
-				  bbs.setUserID(rs.getString(3));
-				  bbs.setBbsDate(rs.getString(4));
-				  bbs.setBbsContent(rs.getString(5));
-				  bbs.setBbsAvailable(rs.getInt(6));
+				  Urdo urdo = new Urdo();
+				  urdo.setUrdoID(rs.getInt(1));
+				  urdo.setUrdoTitle(rs.getString(2));
+				  urdo.setLookup(rs.getString(3));
+				  urdo.setRecommend(rs.getString(4));
+				  urdo.setUserID(rs.getString(5));
+				  urdo.setUrdoDate(rs.getString(6));
+				  urdo.setUrdoContent(rs.getString(7));				 
+				  urdo.setUrdoAvailable(rs.getInt(8));
 				  
-				  return bbs;	  
+				  return urdo;	  
 			  } 
 		  } catch (Exception e) {
 			  e.printStackTrace();

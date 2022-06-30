@@ -1,15 +1,15 @@
-package bbs;
+package urdo;
 
 public class Urdo {
 
-	private int urdoID;
-	private String urdoTitle;
-	private String userID;
-	private String urdoDate;
+	private int urdoID;  
+    private String urdoTitle; //글제목
+    private String lookup;    //조회
+    private String recommend; //추천수
+    private String userID; 
+	private String urdoDate;  //작성일
 	private String urdoContent;
 	private int urdoAvailable;
-	
-	
 	
 	public int getUrdoID() {
 		return urdoID;
@@ -22,6 +22,18 @@ public class Urdo {
 	}
 	public void setUrdoTitle(String urdoTitle) {
 		this.urdoTitle = urdoTitle;
+	}
+	public String getLookup() {
+		return lookup;
+	}
+	public void setLookup(String lookup) {
+		this.lookup = lookup;
+	}
+	public String getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
 	}
 	public String getUserID() {
 		return userID;
@@ -47,16 +59,18 @@ public class Urdo {
 	public void setUrdoAvailable(int urdoAvailable) {
 		this.urdoAvailable = urdoAvailable;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "Bbs [urdoID=" + urdoID + ", urdoTitle=" + urdoTitle + ", userID=" + userID + ", urdoDate=" + urdoDate
-				+ ", urdoContent=" + urdoContent + ", urdoAvailable=" + urdoAvailable + "]";
+		return "Urdo [urdoID=" + urdoID + ", urdoTitle=" + urdoTitle + ", lookup=" + lookup + ", recommend=" + recommend
+				+ ", userID=" + userID + ", urdoDate=" + urdoDate + ", urdoContent=" + urdoContent + ", urdoAvailable="
+				+ urdoAvailable + "]";
 	}
 	
 	
 	
+	
+
 	
 	
 	

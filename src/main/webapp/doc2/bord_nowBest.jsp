@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import ="java.io.PrintWriter" %>
+    <%@page import ="urdo.UrdoDAO" %>
+    <%@page import ="urdo.Urdo" %>
+    <%@page import ="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +18,7 @@
     <link rel="stylesheet" href="../css/boardNoWrite.css">
     <!-- JQ -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    
 
     <script>
         $(document).ready(function()
@@ -242,6 +247,16 @@
                     <td class="tname">날짜</td>
                 </tr>
                 <!-- 게시판 내용물 시작 -->
+               <% 
+                UrdoDAO urdoDAO = new UrdoDAO();
+                ArrayList<Urdo> list = urdoDAO.getList(pageNumber);
+                
+                for(int i=0; i<list.size(); i++)
+                {
+               %>
+               <tr>
+                 <td><%=list.get(i).geturdoID() %>  </td>
+                 <td><a href ="boardContent.jsp?urdoID=<%= list.get(i).getUrdoID()%">  <%=list.get(i).getUrdoTitle() %>  </a></td>               
                 <tr>
                     <td>1</td>
                     <td><img src="../img/board/frog.png" class="pic"></td>
@@ -251,87 +266,7 @@
                     <td>김첨지</td>
                     <td>2022-06-16</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지2 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지3 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지4 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지5 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지6 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지7 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지8 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지9 </a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지10 </a></td>
-                    <td>331</td>
-                    <td>91</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
+                
             </table>
             <!--  페이지 숫자 -->
         </div>
