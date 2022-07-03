@@ -15,10 +15,10 @@
    
  session.invalidate(); //session을 빼앗아서 로그아웃시키는것
  
- 
+
  %>
 <script>
- location.href ='login.jsp';
+ location.href ='index.jsp';
 </script>
 </body>
 </html>

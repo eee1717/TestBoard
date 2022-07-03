@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 public class UrdoDAO {
 
-	private Connection conn;
-	
+	private Connection conn;	
 	private ResultSet rs;
 	
 	public UrdoDAO() {
@@ -26,7 +25,7 @@ public class UrdoDAO {
 	}
 //	현재시간 보여주기
 	public String getDate() {
-	  String SQL = "SELECT NOW()";
+	  String SQL = "SELECT NOW()"; //현재시간가져오는 MySql명령어
 	  try {
 		  PreparedStatement pstmt = conn.prepareStatement(SQL);
 		  rs = pstmt.executeQuery();
@@ -53,32 +52,32 @@ public class UrdoDAO {
 		  }
 		  return -1; //데이터베이스오류 일경우 -1을반환
 		}
-	
-	 public int write(String urdoTitle,String lookup,String recommend, String userID, String urdoContent)  //글쓰기 
+	//글작성 bowd 목록    
+	 public int bowd(String urdoTitle,String lookup,String recommend ,String userID, String urdoContent)  //글쓰기 
 	 {	
-		 String SQL = "INSERT INTO URDO VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		 String SQL = "INSERT INTO URDO VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
-			  	 pstmt.setInt(1, getNext());
-			  pstmt.setString(2, urdoTitle);
-			  pstmt.setString(3, lookup);
-			  pstmt.setString(4, recommend);
-			  pstmt.setString(5, userID);
+			  pstmt.setInt   (1, getNext()); //다음번에 쓰여야할 글번호
+			  pstmt.setString(2, urdoTitle);		
+			  pstmt.setString(3, lookup);		
+			  pstmt.setString(4, recommend);		
+		      pstmt.setString(5, userID);
 			  pstmt.setString(6, getDate());
 			  pstmt.setString(7, urdoContent);
-			  	 pstmt.setInt(8, 1); //처음글 일경우
-			 
-			  return pstmt.executeUpdate();		 
+	    	  pstmt.setInt(8, 1); //처음글 일경우
+			 int result = pstmt.executeUpdate();
+			  return result;		 
 		  } catch (Exception e) {
 			  e.printStackTrace();
 		  }
 		  return -1; //데이터베이스오류
 		 
 	 }
-	
+	//글목록
 	 public ArrayList<Urdo> getList(int pageNumber){
 		 
-		  String SQL = "SELECT * FROM TestBoard WHERE urdoID < ? AND urdoAvailable = 1 ORDER BY urdoID DESC LIMIT 6"; // 내용을 위에서부터 6깨까지만 불러옴
+		  String SQL = "SELECT * FROM URDO WHERE urdoID < ? AND urdoAvailable = 1 ORDER BY urdoID DESC LIMIT 6"; // 내용을 위에서부터 6깨까지만 불러옴
 		  ArrayList<Urdo> list = new ArrayList<Urdo>();
 		  try {
 			  PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -122,6 +121,8 @@ public class UrdoDAO {
 		  return false;
 		}
 		 
+	 
+	 //글목록관련 시작
 	 public Urdo getUrdo(int urdoID) {
 		 
 		  String SQL = "SELECT * FROM URDO WHERE urdoID =?";  //urdoID의 값을 입력시 그숫자에 해당하는 게시글을 가져온다.
@@ -139,7 +140,7 @@ public class UrdoDAO {
 				  urdo.setUrdoDate(rs.getString(6));
 				  urdo.setUrdoContent(rs.getString(7));				 
 				  urdo.setUrdoAvailable(rs.getInt(8));
-				  
+				// 8개의변수를받아 urdo인스턴스에 넣어서 urdo를 불러낸 대상에게 반환한다. 
 				  return urdo;	  
 			  } 
 		  } catch (Exception e) {
@@ -156,3 +157,4 @@ public class UrdoDAO {
 
 	
 
+ 

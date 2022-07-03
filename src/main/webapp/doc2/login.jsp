@@ -92,7 +92,7 @@
                     <span>베스트 게시글</span>
                 </label>
                 <ul class="depth2">
-                    <li><a href="board_nowBest.html" title="실시간베스트">실시간 베스트</a></li>
+                    <li><a href="bord_nowBest.jsp" title="실시간베스트">실시간 베스트</a></li>
                     <li><a href="board_monthBest.html" title="월간베스트">월간 베스트</a></li>
                     <li><a href="board_miniBest.html" title="미니홈피추천작">미니홈피 추천작</a></li>
                 </ul>
@@ -162,13 +162,13 @@
       }
       else{
       %>
-         <button onclick="Login()" class="btn">
+         <button onclick="Logout()" class="btn">
             <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
             <span>로그아웃</span>
         </button>
       <%
       }        
-        %>
+       %>
         
         
     </div>
@@ -195,7 +195,16 @@
             <label for="chk1" id="chkLabel">로그인 유지</label>
         </div>
 
-        <input type="submit" value="로그인">
+        <input type="submit" value="로그인" class="loginA">
+          
+   
+      <!--  원본
+        <a href="#" class="loginA">
+            <span>Login</span>
+            <i></i>
+        </a> -->
+        
+        
 
         <div id="signIn">
             <a href="signUp.jsp" id="ss1">회원가입</a>

@@ -53,6 +53,11 @@ function Login()
     location.href = "login.jsp";
 }
 
+function Logout()
+{
+	
+	    location.href = "#";
+}
 
 
 

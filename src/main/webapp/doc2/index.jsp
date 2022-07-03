@@ -25,6 +25,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%
+   String userID = null;
+   if(session.getAttribute("userID") != null){
+	   userID =(String) session.getAttribute("userID");
+   }
+%>
+
+
+
 <!--네비게이션 시작-->
 <nav class="nav-all">
     <!--헤더 시작-->
@@ -91,7 +101,7 @@
                     <span>베스트 게시글</span>
                 </label>
                 <ul class="depth2">
-                    <li><a href="board_nowBest.html" title="실시간베스트">실시간 베스트</a></li>
+                    <li><a href="bord_nowBest.jsp" title="실시간베스트">실시간 베스트</a></li>
                     <li><a href="board_monthBest.html" title="월간베스트">월간 베스트</a></li>
                     <li><a href="board_miniBest.html" title="미니홈피추천작">미니홈피 추천작</a></li>
                 </ul>
@@ -148,10 +158,32 @@
     </div>
     <!--로그인/로그아웃 버튼-->
     <div id="loginWrap">
+   
+     <% 
+        if(userID== null){
+        %>
         <button onclick="Login()" class="btn">
             <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
             <span>로그인</span>
         </button>
+        
+     <%    
+      }
+      else{
+      %>
+         <button onclick="Logout()" class="btn">
+            <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
+            <span>로그아웃</span>
+        </button>
+      <%
+      }        
+       %>
+   
+   
+   
+   
+   
+   
     </div>
 </nav>
 

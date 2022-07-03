@@ -122,7 +122,7 @@
                     <span>베스트 게시글</span>
                 </label>
                 <ul class="depth2">
-                    <li><a href="board_nowBest.html" title="실시간베스트" id="active">실시간 베스트</a></li>
+                    <li><a href="bord_nowBest.jsp" title="실시간베스트" id="active">실시간 베스트</a></li>
                     <li><a href="board_monthBest.html" title="월간베스트">월간 베스트</a></li>
                     <li><a href="board_miniBest.html" title="미니홈피추천작">미니홈피 추천작</a></li>
                 </ul>
@@ -191,7 +191,7 @@
       }
       else{
       %>
-         <button onclick="Login()" class="btn">
+         <button onclick="logoutAction.jsp" class="btn">
             <img src="../img/sidebar/login-unlock.svg" alt="login" class="navIcon">
             <span>로그아웃</span>
         </button>
@@ -246,26 +246,36 @@
                     <td class="tname">글쓴이</td>
                     <td class="tname">날짜</td>
                 </tr>
+                
                 <!-- 게시판 내용물 시작 -->
                <% 
                 UrdoDAO urdoDAO = new UrdoDAO();
                 ArrayList<Urdo> list = urdoDAO.getList(pageNumber);
                 
                 for(int i=0; i<list.size(); i++)
-                {
+                {  
                %>
-               <tr>
-                 <td><%=list.get(i).geturdoID() %>  </td>
-                 <td><a href ="boardContent.jsp?urdoID=<%= list.get(i).getUrdoID()%">  <%=list.get(i).getUrdoTitle() %>  </a></td>               
-                <tr>
-                    <td>1</td>
-                    <td><img src="../img/board/frog.png" class="pic"></td>
-                    <td><a href="boardContents.html" class="boardlist">가위바위보를 이기는 방법99가지1</a></td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>김첨지</td>
-                    <td>2022-06-16</td>
-                </tr>
+           <tr>
+             <td><%= list.get(i).getUrdoID() %></td> <!-- 작성자 -->
+             <td><a href="#"></a> </td>
+             <td><a href ="boardContent.jsp?UrdoID=<%= list.get(i).getUrdoID() %>"> <%=list.get(i).getUrdoTitle() %></a></td> <!-- 글제목 -->
+             <td><%= list.get(i).getLookup() %> </td> <!-- 조회수 -->
+             <td><%= list.get(i).getRecommend() %> </td> <!-- 추천수 -->
+             <td><%= list.get(i).getUserID() %> </td> <!-- 글쓴이 -->
+             <td><%= list.get(i).getUrdoDate().substring(0,11)+ list.get(i).getUrdoDate().substring(11,13)+"시"+list.get(i).getUrdoDate().substring(14,16) +"분" %> </td><!-- 작성일 -->
+           </tr>
+           <%
+                }
+           %>
+                
+          <!--   <tr>
+            <td>작성자</td>
+            <td>글제목탈룰라</td>
+            <td>추천수</td>
+            <td>조회수</td>
+            <td>아이디</td>
+            <td>탈룰라</td>
+            </tr> -->
                 
             </table>
             <!--  페이지 숫자 -->
@@ -282,6 +292,7 @@
                 <img class="page_arrow menuIcon" id="next" src="../img/board/page-arrow-forward.svg">
             </div>
             <!--  페이지 숫자 끝-->
+            <a href="board_humorWrite.jsp" >글쓰기</a>
             <!-- 게시판 내용 관련 코드  끝-->
         </div>
         
